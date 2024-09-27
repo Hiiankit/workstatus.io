@@ -11,7 +11,7 @@ if __name__ == "__main__":
     screenshot_manager = ScreenshotManager()
     
     # Schedule screenshot every 10 minutes
-    schedule.every(10).minutes.do(take_screenshot)
+    schedule.every(1).minutes.do(take_screenshot)
 
     # Start activity tracking in a separate thread
     import threading
