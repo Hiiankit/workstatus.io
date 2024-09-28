@@ -15,16 +15,11 @@ class ScreenshotManager:
         else:
             self.save_dir = save_dir
     
-        self.s3_client = boto3.client(
-            's3',
-            aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
-            aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY")
-        )
-        self.bucket_name = os.getenv("AWS_BUCKET_NAME")
-        
         if not os.path.exists(self.save_dir):
             os.makedirs(self.save_dir)
-
+        
+        # self.delete_ss = DeleteScreenshots()
+        # self.delete_ss.delete_all_files()
 
 
     def capture_screenshot(self, blurred=False):
@@ -34,11 +29,7 @@ class ScreenshotManager:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         screenshot_file = os.path.join(self.save_dir, f"screenshot_{timestamp}.png")
         screenshot.save(screenshot_file)
+        print("ss captured")
         
         # self.upload_to_s3(screenshot_file)
         # os.remove(screenshot_file)  # Remove local file after upload
-
-    def upload_to_s3(self, filename):
-        # self.s3_client.upload_file(filename, self.bucket_name, filename)
-        print(f"Uploaded {filename} to S3")
-
