@@ -1,12 +1,6 @@
 import subprocess
 import sys
 
-import schedule
-import time, os
-from activity_tracker import ActivityTracker
-from screenshot_manager import ScreenshotManager
-from handling_upload import HandlingUpload
-from Application import App
 #install all the required packages 
 def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
@@ -16,6 +10,7 @@ required_packages = [
     "opencv-python",
     "boto3",
     "python-dotenv",
+    # "schedule",
 ]
 
 for package in required_packages:
@@ -24,6 +19,16 @@ for package in required_packages:
     except ImportError:
         install(package)
     
+
+
+
+# import schedule
+import time, os
+from activity_tracker import ActivityTracker
+from screenshot_manager import ScreenshotManager
+from handling_upload import HandlingUpload
+from Application import App
+
 def take_screenshot():
     screenshot_manager.capture_screenshot(blurred=False)
 
