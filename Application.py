@@ -32,8 +32,10 @@ class App:
         
     def submit_interval(self):
         self.capture_interval = self.capture_interval_var.get()  
-        print(f"Capture interval set to {self.capture_interval} seconds.")
+        print(f"Capture interval set to {self.capture_interval} minutes.")
         self.interval_entry.config(state="disabled")  # Disable the entry box
+        self.submit_button.config(state="disabled")  # Disable the submit button
+
 
         if self.capturing:
             self.capturing = False  # Stop the current loop

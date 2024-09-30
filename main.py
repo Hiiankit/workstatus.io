@@ -49,7 +49,6 @@ if __name__ == "__main__":
     handling_up.upload_all()
 
     os._exit(0)
-    # Start activity tracking and upload handling in a separate thread
     
     # Run scheduled tasks
     while True:
