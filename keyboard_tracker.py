@@ -7,7 +7,7 @@ class KeyTracker:
 
     def detect_keypress(self):
         start_time = time.time()
-
+        self.i=0
         def press_on(key):
             self.i += 1
 
