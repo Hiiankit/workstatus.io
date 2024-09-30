@@ -46,7 +46,7 @@ class App:
     def start_capturing(self):
         def capture_loop():
             while self.capturing:
-                self.screenshot_manager.capture_screenshot(blurred=False, submit_interval=self.capture_interval)
+                self.screenshot_manager.capture_screenshot(blurred=False, submit_interval=self.capture_interval*60)
         
         self.capture_thread = threading.Thread(target=capture_loop)
         self.capture_thread.daemon = True  # Make sure thread exits when the program ends

@@ -1,3 +1,6 @@
+import subprocess
+import sys
+
 import schedule
 import time, os
 from activity_tracker import ActivityTracker
@@ -5,6 +8,22 @@ from screenshot_manager import ScreenshotManager
 from handling_upload import HandlingUpload
 from Application import App
 
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+required_packages = [
+    "pyautogui",
+    "opencv-python",
+    "boto3",
+    "python-dotenv",
+]
+
+for package in required_packages:
+    try:
+        __import__(package)
+    except ImportError:
+        install(package)
+    
 def take_screenshot():
     screenshot_manager.capture_screenshot(blurred=False)
 
@@ -15,7 +34,7 @@ if __name__ == "__main__":
     
     # Schedule screenshot every 30 seconds
     app = App(screenshot_manager, handling_up)  # Create an instance of App
-    schedule.every(30).seconds.do(take_screenshot)
+    # schedule.every(30).seconds.do(take_screenshot)
 
     import threading
     activity_thread = threading.Thread(target=activity_tracker.check_activity)
