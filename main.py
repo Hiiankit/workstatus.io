@@ -7,7 +7,7 @@ from activity_tracker import ActivityTracker
 from screenshot_manager import ScreenshotManager
 from handling_upload import HandlingUpload
 from Application import App
-
+#install all the required packages 
 def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     # screenshot_manager_thread.start()
 
     app.run()
-        
+
     handling_up.upload_all()
 
     os._exit(0)
