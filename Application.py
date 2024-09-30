@@ -32,10 +32,8 @@ class App:
         
     def submit_interval(self):
         self.capture_interval = self.capture_interval_var.get()  
-        print(f"Capture interval set to {self.capture_interval} minutes.")
+        print(f"Capture interval set to {self.capture_interval} seconds.")
         self.interval_entry.config(state="disabled")  # Disable the entry box
-        self.submit_button.config(state="disabled")  # Disable the submit button
-
 
         if self.capturing:
             self.capturing = False  # Stop the current loop
@@ -48,7 +46,7 @@ class App:
     def start_capturing(self):
         def capture_loop():
             while self.capturing:
-                self.screenshot_manager.capture_screenshot(blurred=False, submit_interval=self.capture_interval*60)
+                self.screenshot_manager.capture_screenshot(blurred=False, submit_interval=self.capture_interval)
         
         self.capture_thread = threading.Thread(target=capture_loop)
         self.capture_thread.daemon = True  # Make sure thread exits when the program ends
