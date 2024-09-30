@@ -7,9 +7,6 @@ from activity_tracker import ActivityTracker
 from screenshot_manager import ScreenshotManager
 from handling_upload import HandlingUpload
 from Application import App
-#install all the required packages 
-def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
 required_packages = [
     "pyautogui",
@@ -34,7 +31,7 @@ if __name__ == "__main__":
     
     # Schedule screenshot every 30 seconds
     app = App(screenshot_manager, handling_up)  # Create an instance of App
-    # schedule.every(30).seconds.do(take_screenshot)
+    schedule.every(30).seconds.do(take_screenshot)
 
     import threading
     activity_thread = threading.Thread(target=activity_tracker.check_activity)
@@ -45,10 +42,11 @@ if __name__ == "__main__":
     # screenshot_manager_thread.start()
 
     app.run()
-
+        
     handling_up.upload_all()
 
     os._exit(0)
+    # Start activity tracking and upload handling in a separate thread
     
     # Run scheduled tasks
     while True:
