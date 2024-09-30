@@ -25,7 +25,7 @@ class HandlingUpload:
                         print("file uploaded")
                         os.remove(file_path)  # Delete the file
                         print("file removed")
-                    time.sleep(100)
+                time.sleep(100)
 
 
                 # self.delete_ss.delete_all_files()
@@ -33,7 +33,13 @@ class HandlingUpload:
                 print(f"Upload failed: {e}. Retrying in {self.retry_delay} seconds...")
                 time.sleep(self.retry_delay)
 
-
-
+    def upload_all(self):
+        for file_name in os.listdir(self.save_dir):
+                    file_path = os.path.join(self.save_dir, file_name)
+                    if os.path.isfile(file_path):  # Check if it's a file
+                        self.s3_client.upload_file(file_path, self.bucket_name, file_path)
+                        print("file uploaded")
+                        os.remove(file_path)  # Delete the file
+                        print("file removed")
 
         
